@@ -3,9 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var UserAPI =  require('./controllers/user_api')
 var dao = require('./dao');
 var app = express();
 
@@ -14,16 +14,20 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyParser.json());
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
+
+app.get('/users/:user_id',UserAPI.checkUser);
 app.use(function(req, res, next) {
-  next(createError(404));
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'content-type');
+  next();
 });
 
 // error handler
@@ -37,6 +41,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-dao.dbConnection.query("");
 
 module.exports = app;
