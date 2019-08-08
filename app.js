@@ -6,6 +6,8 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var UserAPI =  require('./controllers/user_api')
+var AuthAPI = require('./controllers/auth')
+var ManagerAPI = require('./controllers/manager_api')
 var dao = require('./dao');
 var app = express();
 
@@ -23,6 +25,10 @@ app.use('/', indexRouter);
 // catch 404 and forward to error handler
 
 app.get('/users/:user_id',UserAPI.checkUser);
+app.post('/auth/login',AuthAPI.login);
+app.post('/users',UserAPI.createUser);
+app.get('/managers/:manager_id',ManagerAPI.checkManager);
+app.post('/managers',ManagerAPI.createManager);
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
