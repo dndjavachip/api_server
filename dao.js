@@ -1,9 +1,9 @@
 var db = require('mysql');
-const SERVER_IP_ADDR =""; // Blank
-const DATABASE='';
-const MYSQL_USER = "";
-const MYSQL_PASSWORD = "";
-const SERVER_PORT = "";
+const SERVER_IP_ADDR ="34.97.219.44"; // Blank
+const DATABASE='javachip_database';
+const MYSQL_USER = "root";
+const MYSQL_PASSWORD = "dearjavachip0713";
+const SERVER_PORT = "3306";
 
 var dbConnection  = db.createConnection({
     host : SERVER_IP_ADDR,
