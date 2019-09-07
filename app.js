@@ -29,6 +29,12 @@ app.post('/auth/login',AuthAPI.login);
 app.post('/users',UserAPI.createUser);
 app.get('/managers/:manager_id',ManagerAPI.checkManager);
 app.post('/managers',ManagerAPI.createManager);
+app.post('/menu',ManagerAPI.createMenu);
+app.get('/menu/:cafe_id',ManagerAPI.listMenu);
+app.get('/auth/refresh',AuthAPI.refresh);
+app.post('/cafe',ManagerAPI.createCafe);
+app.get('/cafe',ManagerAPI.listCafe);
+app.post('/order',ManagerAPI.createOrder);
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');

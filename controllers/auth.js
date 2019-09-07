@@ -83,7 +83,19 @@ exports.login = function(req,res,next) {
 
 exports.refresh = function(req,res,next) {
 
+        var token = req.get('x-access-token');
+    
+        if(typeof token !== 'undefined'){
+            var decoded = jwt.verify(token, secretObj.secret);
+            res.json(decoded)
+           
+          
+        }else{
+            res.sendStatus(403);
+        }
+    };
 
-}
+
+
 
 // res.send -> JWT Access Token 
